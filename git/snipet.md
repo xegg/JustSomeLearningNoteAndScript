@@ -24,3 +24,30 @@ You may find these answers helpful as well:
 
 How to move HEAD (checkout, revert, reflog, reset)
 How to uncommit my last commit in gitundo-the-last-commit
+
+
+### find how many line I commit this day
+git log --author='0xd3' --oneline --shortstat --pretty="%cd"  
+
+
+### More about git log
+https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
+
+## Show difference introduced
+git log -p -2 
+
+## See abbreviate stats
+git log --stat
+
+## --pretty
+git log --pretty=online
+git log --pretty=short
+git log --pretty=full
+git log --pretty=fuller
+git log --pretty=format:"%h - %an, %ar : %s"
+
+Source:
+https://www.atlassian.com/git/tutorials/git-log
+https://www.andyjeffries.co.uk/25-tips-for-intermediate-git-users/
+http://zsoltfabok.com/blog/2012/02/git-blame-line-history/
+
