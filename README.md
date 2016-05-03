@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 SELF LEARNING PROJECTS
 ========
 
