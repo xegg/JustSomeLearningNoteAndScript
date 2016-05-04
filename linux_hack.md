@@ -1,4 +1,3 @@
-https://wrfly.gitbooks.io/linux-101-hacks/content/hack-51_cpio.html
 Gpu显示当前用户登陆时间
 ac -d  
 
@@ -31,3 +30,11 @@ sudo du -a / | sort -n -r | head -n 10
 修改全部文件
 sed "s/designpatterns.strategy/g" *.java -i  
 http://coolshell.cn/articles/9104.html
+
+logrotate 
+用于日志轮转, 邮件转发等功能, 简单快速
+
+Source
+http://www.commandlinefu.com/commands/browse
+https://wrfly.gitbooks.io/linux-101-hacks/content/hack-51_cpio.html
+http://blog.commandlinekungfu.com/
