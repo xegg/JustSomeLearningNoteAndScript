@@ -28,6 +28,7 @@ How to uncommit my last commit in gitundo-the-last-commit
 
 ### find how many line I commit this day
 git log --author='0xd3' --oneline --shortstat --pretty="%cd"  
+git log  --oneline --shortstat --pretty="%cd"  
 
 
 ### More about git log

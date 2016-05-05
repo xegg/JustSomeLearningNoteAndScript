@@ -28,11 +28,20 @@ od xxd 产看二进制文件
 sudo du -a / | sort -n -r | head -n 10 
 
 修改全部文件
-sed "s/designpatterns.strategy/g" *.java -i  
+sed "s/designpatterns.strategy/g" 3 \*.java -i  
 http://coolshell.cn/articles/9104.html
 
 logrotate 
 用于日志轮转, 邮件转发等功能, 简单快速
+
+Send Signal to a Process Using Kill
+ps -C a.out
+kill -s USR1 pid
+
+kill process
+ps -ef | grep firefox #find process
+pkill {process id}
+xkill
 
 Source
 http://www.commandlinefu.com/commands/browse

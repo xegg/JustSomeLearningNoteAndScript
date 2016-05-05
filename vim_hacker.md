@@ -128,5 +128,9 @@ ftp.vim.org/vim/runtime/spell
 
 :!wc -m % 显示当前行多少字符
 
+vim/jk-jumps.vim
+this script can fix j-k with jumps
+
 Source:
 http://usevim.com/
+
