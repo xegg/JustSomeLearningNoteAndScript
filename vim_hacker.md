@@ -131,6 +131,34 @@ ftp.vim.org/vim/runtime/spell
 vim/jk-jumps.vim
 this script can fix j-k with jumps
 
+delete blank char in the end;
+%s/\s\+$//
+%norm $F|D
+
+surround change the surround
+c
+d
+yi textobject subtl
+
+Plugin:signify
+]c [c Move to next chanage bommer
+text-object
+
+Plubin:conflict-marker
+[x ]x Jump among comflict marker
+co ct cb cn ['choose ourselves', 'choose themselves', 'choose both', 'choose null']
+
+Plugin:vim-bufferline
+Show the bufferline.
+
+Plugin:Undotree
+<Leader>u Execlent!
+
+Plugin:abolish
+<Leader>u Execlent!
+
+q: can search command history
+
 Source:
 http://usevim.com/
 

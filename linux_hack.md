@@ -1,3 +1,8 @@
+Learning Plan:
+1. manipulate file(sed, awk)
+2. Network monitor(netstat)
+3. Some useful command
+
 Gpu显示当前用户登陆时间
 ac -d  
 
