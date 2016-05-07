@@ -1,3 +1,8 @@
+Source
+http://www.commandlinefu.com/commands/browse
+https://wrfly.gitbooks.io/linux-101-hacks/content/hack-51_cpio.html
+http://blog.commandlinekungfu.com/
+
 Learning Plan:
 1. manipulate file(sed, awk)
 2. Network monitor(netstat)
@@ -48,7 +53,6 @@ ps -ef | grep firefox #find process
 pkill {process id}
 xkill
 
-Source
-http://www.commandlinefu.com/commands/browse
-https://wrfly.gitbooks.io/linux-101-hacks/content/hack-51_cpio.html
-http://blog.commandlinekungfu.com/
+Download whole ftp site
+wget -m 
+
