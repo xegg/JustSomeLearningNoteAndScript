@@ -34,3 +34,21 @@ a = A()
 a.hello = types.MethodType(hello, a)
 
 ### 打开类技术
+
+### What's in a object.
+dir(cat)
+hasattr('a', 'rsplit')
+getattr('a', 'rsplit')
+setattr('a', 'rsplit')
+__doc__ __name__ __dict__ __file__
+import inspect
+getmembers(object[,predicate])
+getmodule(object)
+getfile(object)
+getsource(object)
+getargspec(func)
+getargvalues(fram)
+currentframe()
+getmro(cls)
+
+chapter 2:
