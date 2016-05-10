@@ -162,3 +162,4 @@ q: can search command history
 Source:
 http://usevim.com/
 
+vim -x <FILENAME>
