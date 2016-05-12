@@ -163,3 +163,7 @@ Source:
 http://usevim.com/
 
 vim -x <FILENAME>
+
+ci', di',
+
+vim +"set nobomb | set fenc=utf8 | x" filename.txt

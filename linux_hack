@@ -187,3 +187,47 @@ bind -x '"\C-l":ls -l'
 lsof -Pan -i tcp -i udp
 
 echo "task goes here" | cat - todo.txt | sponge todo.txt
+
+( ( sleep 2h; your-command your-args ) & )
+
+cd !$:h
+
+lsof -c dhcpd
+list all files opened by particular command
+
+$ grep -rl oldstring . |xargs sed -i -e 's/oldstring/newstring/'
+recurse search and replace old with new string
+
+netstat -ant | awk '{print $NF}' | grep -v '[a-z]' | sort | uniq -c
+
+read -s pass; echo $pass | md5sum | base64 | cut -c -16
+create strong, but easy remerber password
+
+( command & )
+A child process which survivie the parent's death
+
+file -s /dev/sd*
+
+grep -Fx -f file1 file2
+
+read -sn 1 -p "Press any key to continue..."
+
+[[ test_condition ]] && if_true_do_this || otherwise_do_that
+
+ls -Q
+list files  with quotes around each file
+
+nethogs -p eth0
+
+<COMMAND> |:
+built-in pip-based data sink
+
+echo {1..199}" bottles of beer on the wall, cold bottle of beer, take one down, pass it around, one less bottle of beer on the wall,, " | espeak -v english -s 140
+
+getconf LONG_BIT
+
+for i in ?.ogg; do mv $i 0$i; done
+convert single digit to double digit
+
+wall <<< "Broadcast This"
+
