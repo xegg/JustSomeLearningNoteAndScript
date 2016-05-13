@@ -2,6 +2,8 @@ Source
 http://www.commandlinefu.com/commands/browse
 https://wrfly.gitbooks.io/linux-101-hacks/content/hack-51_cpio.html
 http://blog.commandlinekungfu.com/
+http://www.tecmint.com/command-line-tools-to-monitor-linux-performance/
+http://www.binarytides.com/linux-commands-monitor-network/
 
 Learning Plan:
 1. manipulate file(sed, awk)
@@ -96,7 +98,6 @@ mv filename.{old,new}
 
 ps aux | sort -nk +4 | tail
 
-lsof -i
 
 rm !(*.foo|*.bar)
 
@@ -154,7 +155,6 @@ watch -n 1 'echo "obase=2;`date +%s`" | bc'
 
 wget -r -l1 --no-parent -nH -nd -P/tmp -A".gif,.jpg" http://example.com/images
 
-lsof -i tcp:80
 
 leave +1
 
@@ -174,7 +174,6 @@ grep --color=always | less -R
 
 sudo find / -mmin 60 -type f
 
-lsof -P -i -n | cut -f 1 -d " "| uniq | tail -n +2
 
 alias dush="du -sm *|sort -n|tail"
 
@@ -184,7 +183,6 @@ bind -x '"\C-l":ls -l'
 
 <ctrl+z> fg; notify_me
 
-lsof -Pan -i tcp -i udp
 
 echo "task goes here" | cat - todo.txt | sponge todo.txt
 
@@ -192,7 +190,6 @@ echo "task goes here" | cat - todo.txt | sponge todo.txt
 
 cd !$:h
 
-lsof -c dhcpd
 list all files opened by particular command
 
 $ grep -rl oldstring . |xargs sed -i -e 's/oldstring/newstring/'
@@ -231,3 +228,64 @@ convert single digit to double digit
 
 wall <<< "Broadcast This"
 
+### LSOF Command
+
+FD – stands for File descriptor and may seen some of the values as:
+
+cwd current working directory
+rtd root directory
+txt program text (code and data)
+mem memory-mapped file
+Also in FD column numbers like 1u is actual file descriptor and followed by u,r,w of it’s mode as:
+
+r for read access.
+w for write access.
+u for read and write access.
+TYPE – of files and it’s identification.
+
+DIR – Directory
+REG – Regular file
+CHR – Character special file.
+FIFO – First In First Out
+
+lsof -i 4
+In below example shows only IPv4 and IPv6 network files open with separate commands.
+
+lsof -u egg
+specify user
+
+lsof -i -u^egg
+Exclude User with ‘^’ Character
+
+lsof -P -i -n | cut -f 1 -d " "| uniq | tail -n +2
+
+lsof -i tcp:80
+Find Processes running on Specific Port
+
+lsof -Pan -i tcp -i udp
+
+lsof -c dhcpd
+
+lsof -p 1
+Search by PID
+
+kill -9 `lsof -t -u tecmint`
+ Kill all Activity of Particular User
+
+lsof /var/log/syslog
+list open file process
+
+lsof +D /var/log/
+list open file under dictionary
+
+lsof -c ssh -c init
+list specific file start pattern
+
+lsof -u lakshmanan -c init -a
+and operator
+
+# lsof -i :25
+specific port
+
+# lsof -N -u lakshmanan -a
+list all filesystem file
