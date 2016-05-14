@@ -155,12 +155,11 @@ Plugin:Undotree
 <Leader>u Execlent!
 
 Plugin:abolish
-<Leader>u Execlent!
 
 q: can search command history
 
 Source:
-http://usevim.com/
+http:/fdsfd/usevim.com/
 
 vim -x <FILENAME>
 
