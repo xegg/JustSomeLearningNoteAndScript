@@ -289,3 +289,5 @@ specific port
 
 # lsof -N -u lakshmanan -a
 list all filesystem file
+
+ethtool wlan0
