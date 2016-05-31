@@ -52,3 +52,8 @@ https://www.atlassian.com/git/tutorials/git-log
 https://www.andyjeffries.co.uk/25-tips-for-intermediate-git-users/
 http://zsoltfabok.com/blog/2012/02/git-blame-line-history/
 
+# checkout old file
+git log
+git checkout <hash>
+cp <restore file> <path>
+git checkout master

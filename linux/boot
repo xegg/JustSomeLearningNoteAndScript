@@ -1,0 +1,13 @@
+初始化内核
+/boot/vmlinuz-3.19.0-25-generic
+
+配置硬件
+
+创建内核进程
+[pidname/thread_id]
+
+单用户模式
+fsck
+
+GRUB全面引导内核
+/boot/grub/grub.conf
