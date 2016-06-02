@@ -1,0 +1,14 @@
+1. db dd 这些代表的意思
+    db 8 dw 16 dd 32 dup 3(1,2) 1,2,1,2,1,2
+2. 查看段寄存器的分别代表什么?
+3. 查看最后的附录
+4. 查看equ的解释
+5. 转换表的的位置地址
+
+* 为什么变量后面需要加冒号
+* global 是什么意思 
+* syscall 的返回值
+*ebp这个寄存器有什么用处
+
+* resb, resw, resq
+1 byte 2byte, an array of 10 reals
