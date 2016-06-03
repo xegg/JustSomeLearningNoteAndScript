@@ -1,3 +1,5 @@
 errno.h
 stdbool.h
 unistd.h
+第二章, 尝试的使用缓存
+编写tail, last, dd, ac, cat, head, od, dd等工具
