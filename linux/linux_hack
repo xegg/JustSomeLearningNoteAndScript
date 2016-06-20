@@ -291,3 +291,16 @@ specific port
 list all filesystem file
 
 ethtool wlan0
+You can switch to the alternate screen using this command:
+
+$ tput smcup
+And back with:
+
+$ tput rmcup
+These commands just output the appropriate escape sequences for your terminal. If it is an XTERM they will be equivalent to the (more known but less elegant or portable):
+
+$ echo -e "\e[?1049h"
+And:
+
+$ echo -e "\e[?1049l"
+For more terminal control commands see man 5 terminfo.
