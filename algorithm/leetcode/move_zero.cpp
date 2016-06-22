@@ -7,3 +7,19 @@ void moveZeroes(vector<int>& nums) {
     }
     while(p1<nums.size()) nums[p1++] = 0;
 }
+
+void moveZeors2(vector<int>& nums) {
+    int i = 0; poz = 0;
+    for(i = 0; i< nums.size() && poz < nums.size(); i++) {
+        while(nums[poz] == 0)
+            poz++;
+        if(poz < nums.size())
+            nums[i] = nums[poz];
+        else {
+            i--;
+        }
+        poz++;
+        for(; i < nums.size(); i++)
+            nums[i] = 0;
+    }
+}
