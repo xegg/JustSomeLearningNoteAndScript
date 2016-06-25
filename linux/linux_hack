@@ -304,3 +304,7 @@ And:
 
 $ echo -e "\e[?1049l"
 For more terminal control commands see man 5 terminfo.
+
+cloc cal project line
+
+pgcli autocompletation
