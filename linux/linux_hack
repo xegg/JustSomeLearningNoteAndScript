@@ -308,3 +308,5 @@ For more terminal control commands see man 5 terminfo.
 cloc cal project line
 
 pgcli autocompletation
+
+sudo update-rc.d redis-server disable
