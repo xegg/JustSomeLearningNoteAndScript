@@ -57,3 +57,6 @@ git log
 git checkout <hash>
 cp <restore file> <path>
 git checkout master
+
+git diff --cached --stat
+

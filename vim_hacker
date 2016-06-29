@@ -180,3 +180,33 @@ function! TwiddleCase(str)
   return result
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgvl
+
+In any of your vim windows, type something like this:
+for x in range(1,10):
+    print '-> %d' % x
+Visually select both of those lines (V to start visual mode), and type the following:
+
+:!python
+Because you pressed ':' in visual mode, that will end up looking like:
+
+:'<,'>!python
+Hit enter and the selection is replaced by the output of the print statements. You could easily turn it into a mapping:
+
+:vnoremap <f5> :!python<CR>
+
+You can go back, then forward, to visit the locations where changes occurred:
+
+Type g; to jump back to the position of the previous (older) change.
+Type g, to jump to the position of the next (newer) change.
+Display the change list for the current buffer with:
+
+:changes
+You may want a record of the recent locations where changes occurred in the current buffer. As an example, the following commands redirect the output of the :changes command to file c.txt, then edit that file. The 'more' option is temporarily switched off to avoid the "-- More --" prompt.
+
+:set nomore
+:redir > c.txt
+:changes
+:redir END
+:set more
+:e c.txt
+
