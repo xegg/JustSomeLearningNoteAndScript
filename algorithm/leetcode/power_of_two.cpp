@@ -1,0 +1,17 @@
+// count the number fo bits 1, if it only has one, then return true
+bool isPowerOfTwo01(int n) {
+    int cnt = 0; //num of bits 1
+    for(; n>0; n>>=1){
+        if ( n & 1 ) {
+            cnt++;
+            if (cnt>1) return false;
+        }
+    }
+    return cnt==1;
+}
+
+//we notice: 2^n - 1 always be 1111111...
+//so, (2^n) & (2^n-1) always be zero
+bool isPowerOfTwo02(int n) {
+    return n<=0 ? false : (n & (n-1)) == 0;
+}
