@@ -210,3 +210,5 @@ You may want a record of the recent locations where changes occurred in the curr
 :set more
 :e c.txt
 
+"1p....
+put each numeric register successively (where the dot is the Vim repeat operator).
