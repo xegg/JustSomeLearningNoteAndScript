@@ -60,3 +60,4 @@ git checkout master
 
 git diff --cached --stat
 
+gitstats static your project
