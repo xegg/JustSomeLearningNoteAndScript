@@ -1,0 +1,11 @@
+vim:
+1. 自动的把超出的行数放到下一行当中
+gq{motion} % format the line that {motion} moves over
+{Visual}gq % format the visually selected area
+gqq        % format the current line
+...
+
+
+* How to become a good research?
+
+* How to become a good inventor?
