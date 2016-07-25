@@ -1,0 +1,96 @@
+Things are clever, but not too clever
+Algorithms are optimal, both in speed as well as in readability
+Classes, variables and functions are well named and make sense without having to think too much
+You come back to it after a weekend off, and you can jump straight in
+Things that will be reused are reusable
+Unit tests are easy to write
+
+Here are some quotes taken from the book itself:
+
+Bjarne Stroustrup, inventor of C++ and author of The C++ Programming Language
+
+I like my code to be elegant and efficient. The logic should be straightforward to make it hard for bugs to hide, the dependencies minimal to ease maintenance, error handling complete according to an articulated strategy, and performance close to optimal so as not to tempt people to make the code messy with unprincipled optimizations. Clean code does one thing well.
+
+Grady Booch, author of Object Oriented Analysis and Design with Applications Clean code is simple and direct.
+
+Clean code reads like well-written prose. Clean code never obscures the designer’s intent but rather is full of crisp abstractions and straightforward lines of control.
+
+
+“Big” Dave Thomas, founder of OTI, godfather of the Eclipse strategy
+
+Clean code can be read, and enhanced by a developer other than its original author. It has unit and acceptance tests. It has meaningful names. It provides one way rather than many ways for doing one thing. It has minimal dependencies, which are explicitly defined, and provides a clear and minimal API. Code should be literate since depending on the language, not all necessary information can be expressed clearly in code alone.
+
+
+Michael Feathers, author of Working Effectively with Legacy Code
+
+I could list all of the qualities that I notice in clean code, but there is one overarching quality that leads to all of them. Clean code always looks like it was written by someone who cares. There is nothing obvious that you can do to make it better. All of those things were thought about by the code’s author, and if you try to imagine improvements, you’re led back to where you are, sitting in appreciation of the code someone left for you—code left by someone who cares deeply about the craft.
+
+
+Ron Jeffries, author of Extreme Programming Installed and Extreme Programming Adventures in C#
+
+In recent years I begin, and nearly end, with Beck’s rules of simple code. In priority order, simple code:
+
+Runs all the tests;
+Contains no duplication;
+Expresses all the design ideas that are in the system;
+Minimizes the number of entities such as classes, methods, functions, and the like.
+Of these, I focus mostly on duplication. When the same thing is done over and over, it’s a sign that there is an idea in our mind that is not well represented in the code. I try to figure out what it is. Then I try to express that idea more clearly.
+
+Expressiveness to me includes meaningful names, and I am likely to change the names of things several times before I settle in. With modern coding tools such as Eclipse, renaming is quite inexpensive, so it doesn’t trouble me to change. Expressiveness goes The Total Cost of Owning a Mess 11 beyond names, however. I also look at whether an object or method is doing more than one thing. If it’s an object, it probably needs to be broken into two or more objects. If it’s a method, I will always use the Extract Method refactoring on it, resulting in one method that says more clearly what it does, and some submethods saying how it is done.
+
+Duplication and expressiveness take me a very long way into what I consider clean code, and improving dirty code with just these two things in mind can make a huge difference. There is, however, one other thing that I’m aware of doing, which is a bit harder to explain.
+
+After years of doing this work, it seems to me that all programs are made up of very similar elements. One example is “find things in a collection.” Whether we have a database of employee records, or a hash map of keys and values, or an array of items of some kind, we often find ourselves wanting a particular item from that collection. When I find that happening, I will often wrap the particular implementation in a more abstract method or class. That gives me a couple of interesting advantages.
+
+I can implement the functionality now with something simple, say a hash map, but since now all the references to that search are covered by my little abstraction, I can change the implementation any time I want. I can go forward quickly while preserving my ability to change later.
+
+In addition, the collection abstraction often calls my attention to what’s “really” going on, and keeps me from running down the path of implementing arbitrary collection behavior when all I really need is a few fairly simple ways of finding what I want.
+
+Reduced duplication, high expressiveness, and early building of simple abstractions. That’s what makes clean code for me.
+
+
+Ward Cunningham, inventor of Wiki, inventor of Fit, coinventor of eXtreme Programming. Motive force behind Design Patterns. Smalltalk and OO thought leader. The godfather of all those who care about code.
+
+You know you are working on clean code when each routine you read turns out to be pretty much what you expected. You can call it beautiful code when the code also makes it look like the language was made for the problem.
+
+
+
+
+
+
+Code Isn't Beautiful
+I was thrilled to see the book Beautiful Code: Leading Programmers Explain How They Think show up in my Amazon recommendations. It seems like exactly the type of book I would enjoy. So of course I bought a copy.
+
+Beautiful Code: Leading Programmers Explain How They Think
+
+Unfortunately, Beautiful Code wasn't nearly as enjoyable of a read as I had hoped it would be. It is by no means a bad book, but there's something about it that's not quite right.
+
+Part of the problem is that it's a compilation of disconnected essays, much like The Best Software Writing I. Because there are thirty-three different authors, there's naturally going to be a lot of variance in tone, content, and quality. How you feel about the book is largely dicated by how much you like the individual essays. There's certainly no lack of quality in the authors. There are plenty of famous, highly regarded programmers represented here: Brian Kernighan, Yukihiro Matsumoto, Jon Bentley, Charles Petzold, and many others.
+
+Despite all that, I loved The Best Software Writing; why can't I love Beautiful Code? I wasn't able to put my finger on exactly what the deeper problem was with Beautiful Code until I read this eloquent reader review from Dmitry Dvoinikov. I suddenly realized what ultimately trips up Beautiful Code. It was right there in front of me, all along. It's even in the title: Code.
+
+With rare exception, the authors don't even mention the word "beautiful" in their essays. They allude with "There, we have this system, it works like this." What exactly the author finds beautiful about it, and why, remains a secret.
+The chapter written by Yukihiro Matsumoto, the creator of Ruby, was the most impressive standout. It is three pages in which he simply writes about what he believes beautiful code is. He explains his understanding of beautiful code to you. This is what the book should be!
+
+Instead, many chapters just reprint a few pages of code and conclude - see, it is beautiful!
+
+Many times I was unable to grasp the problem - what was it that required that so-called beauty to emerge? I couldn't see the whole picture, but the authors presume I do. Any possible appreciation of beauty requires deep understanding. What if I show you a magnified fragment of Mona Lisa's background, an area of 3x3 blackish pixels? No doubt Leonardo had to paint them too. But where is the beauty?
+
+Only a few authors were wise enough to use pseudocode, something that anyone can read, no matter from which camp. It's just weird when the authors present their beatiful code in Ruby or Perl or Lisp. Look, I haven't touched Ruby yet, I hate Perl and I can't imagine using Lisp in practice. Nevertheless the authors repeatedly say something like "It's easy, I'll show you, this bracket does this and that character does something else. Now do you see how beautiful it is?" They literally show you a piece of poetry in a foreign language and ask you to appreciate it.
+
+A classical example of awful poetry in Russian is (transliterated)
+
+Ya poet, zovus' Neznajka,
+ot menya vam balalajka.
+Can you tell whether this is good or bad and why? What if I told you it's beautiful? Would you believe? Does it appeal to your sense of beauty?
+
+Ideas are beautiful. Algorithms are beautiful. Well executed ideas and algorithms are even more beautiful. But the code itself is not beautiful. The beauty of code lies in the architecture, the ideas, the grander algorithms and strategies that code represents. The code samples presented are indeed clear, readable, and well written. But they are weak evidence of beauty; it's not the language that is inherently beautiful. Barroom doggerel expressed in French or Russian is never automatically elevated to the level of poetry.
+
+So when the Beautiful Code authors proffer pages of code-- real live production code-- and ask us to see the beauty, the code doesn't help. It gets in the way.
+
+It's been a long time since I found *dst++ = *src++ beautiful.
+Focusing on the code is exactly the wrong approach. It's like a detailed technical description of the paints, brushes, and techniques used to paint the Mona Lisa, without any of the historical or artistic context that makes it such an important painting.
+
+Can't we expect readers to see past the language? I'd ask the very same question of the authors. So many of them got mired in the minute details of the code and language that they never got around to the "why" underneath -- the beautiful ideas and concepts that code represents. I'd also ask the same question of every working programmer today. I can scarcely post any code snippets in Visual Basic today without a slew of comments complaining about how awfully horrible Basic syntax is, how their eyes are bleeding, it's unreadable, the horrors of End If versus curly brackets, etcetera, etcetera, ad nauseam. Never mind the language-- what about the underlying algorithmic concept I am trying to represent in code? How does that look?
+
+Apparently, for many of us, beauty really is skin deep.

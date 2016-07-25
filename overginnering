@@ -1,0 +1,63 @@
+Overengineering (or over-engineering) is the designing of a product to be more
+robust or complicated than is necessary for its application, either
+(charitably) to ensure sufficient factor of safety, sufficient functionality,
+or because of design errors. Overengineering can be desirable when safety or
+performance on a particular criterion is critical, or when extremely broad
+functionality is required, but it is generally criticized from the point of
+view of value engineering as wasteful. As a design philosophy, such
+overcomplexity is the opposite of the less is more school of thought (and hence
+a violation of the KISS principle and parsimony).
+
+Overengineering generally occurs in high-end products or specialized market
+criteria, and takes various forms. In one form, products are overbuilt, and
+have performance far in excess of needs (a family sedan that can drive at 300
+km/h, or a home video cassette recorder with a projected lifespan of 100
+years), and hence are more expensive, bulkier, and heavier than necessary.
+Alternatively, they may be overcomplicated – the design may be far more
+complicated than is necessary for its use, such as a modern text editor asking
+whether files should be saved in ASCII, EBCDIC or various multi-byte formats.
+Overcomplexity reduces usability of the product by the end user, and can
+decrease productivity of the design team due to the need to build and maintain
+all the features.
+
+A related issue is market segmentation – making different products for
+different market segments. In this context, a particular product may be more or
+less suited for a particular market segment, and may be over- or under-
+engineered relative to an application.
+
+Contents  [hide] 
+1	Cultural references
+2	See also
+3	References
+4	External links
+Cultural references[edit]
+A story about very precise engineering is given in the 1858 story The Deacon's
+Masterpiece or, the Wonderful "One-hoss Shay": A Logical Story by Oliver
+Wendell Holmes, Sr., which tells of a carriage (one-horse shay)
+
+That was built in such a logical way
+It ran a hundred years to a day,
+And then,
+...
+went to pieces all at once, --
+All at once, and nothing first, --
+Just as bubbles do when they burst.
+
+Because it had been engineered so that no single piece failed first – no piece
+was over-engineered relative to the others, and they thus all collapsed at the
+same time.
+
+You aren't gonna need it
+"You aren't gonna need it"[1][2] (acronym: YAGNI)[3] is a principle of extreme
+programming (XP) that states a programmer should not add functionality until
+deemed necessary.[4] XP co-founder Ron Jeffries has written: "Always implement
+things when you actually need them, never when you just foresee that you need
+them."[5] Other forms of the phrase include "You aren't going to need it"[6][7]
+and "You ain't gonna need it".[8]
+
+YAGNI is a principle behind the XP practice of "do the simplest thing that
+could possibly work" (DTSTTCPW).[2][3] It is meant to be used in combination
+with several other practices, such as continuous refactoring, continuous
+automated unit testing, and continuous integration. Used without continuous
+refactoring, it could lead to disorganized code and massive rework. YAGNI's
+dependency on supporting practices is part of the original definition of XP.
