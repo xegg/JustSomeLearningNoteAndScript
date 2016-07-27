@@ -39,3 +39,18 @@ Restore: cat backup.gz* | gunzip | psql -h localhost -p 5432 -U postgres -d mydb
 
 
 \COPY (select id,name from tablename) TO 'filepath/aa.csv' DELIMITER ',' CSV HEADER;
+
+Should work with a CASE in the order by:
+SELECT * 
+FROM users 
+ORDER BY case id when 2 then 1
+                 when 3 then 2
+                 when 1 then 3
+         end
+
+SELECT * FROM users ORDER BY (id+1)%3
+
+select *
+from comments
+where id in (1,3,2,4)
+order by position(id::text in '2,3,2,4')
