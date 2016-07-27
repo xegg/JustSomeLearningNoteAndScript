@@ -1,5 +1,5 @@
 vim:
-1. 自动的把超出的行数放到下一行当中
+*. 自动的把超出的行数放到下一行当中
 gq{motion} % format the line that {motion} moves over
 {Visual}gq % format the visually selected area
 gqq        % format the current line
@@ -18,3 +18,24 @@ need.
 * when to stop and when to continue?
 * How to elimate the perfect attitude
 * Best way to give varivable a name.
+
+Learning Priority:
+*. 项目用例的编写 4
+*. 学习使用测试框架, 使用测试驱动开发, 培养编写单元测试, 通过, 重构的开发流程 7
+*. 熟悉设计模式, 知道什么场合使用什么框架 7
+*. 学习数据表的设计, 学习前人的经验, 和sql思维方式, 在工程中使用事务. 6
+*. 学习极限编程的一些基础概念, 积极的去尝试, 了解目前比较流行的开发方式, 5
+他的优点和缺点.
+*. 多学习一些企业应用设计案例, 为什么那么设计, 其中遇到的困难, 如何避免, 
+如何组织代码. 4
+
+* 快点看完汇编语言的那本书 5
+* 高质量程序设计艺术, 提升一下自己的编程水平. 4
+*. 学习代码大全中的一些编程技巧 6
+*. 学习web安全知识, 测试自己的代码, sql注入, css攻击等. 6
+* 阅读自己感兴趣的代码, 决策树, 数据归类算法等. 4
+
+* 学习程序设计, 阅读设计原本, 领取驱动设计, 面向对象分析技巧等书籍. 6
+
+* 创新, big idea之类的书, 找到自己未来想要真正投入, 并且能够有收入的行业. 周末阅读
+
