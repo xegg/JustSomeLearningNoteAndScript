@@ -313,3 +313,8 @@ sudo update-rc.d redis-server disable
 
 /*config mouse*/
 xinput list-props
+
+gsettings set com.canonical.Unity.Launcher launcher-position Bottom
+gsettings set com.canonical.Unity.Launcher launcher-position Left
+
+PubkeyAcceptedKeyTypes=+ssh-dss
