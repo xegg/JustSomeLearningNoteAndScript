@@ -63,3 +63,6 @@ git diff --cached --stat
 gitstats static your project
 
 git show 27cf8e84bb88e24ae4b4b3df2b77aab91a3735d8:my_file.txt > my_file.txt.OLD
+
+<!--reset add before commit-->
+git reset
