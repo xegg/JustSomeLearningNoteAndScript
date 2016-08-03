@@ -1,0 +1,11 @@
+I hope this gives you an idea of all the different things you can do with
+KNN and with machine learning! Machine learning is an interesting
+field that you can go pretty deep into if you decide to:
+• KNN is used for classification and regression and involves looking
+at the k-nearest neighbors.
+• Classification = categorization into a group.
+• Regression = predicting a response (like a number).
+• Feature extraction means converting an item (like a fruit or a user)
+into a list of numbers that can be compared.
+• Picking good features is an important part of a successful KNN
+algorithm.
