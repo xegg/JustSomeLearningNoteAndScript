@@ -48,3 +48,6 @@ Handbook of Data Structures and Applications (Chapman & Hall/CRC Computer and In
 
 The Art of Computer Programming, Volumes 1-4A Boxed Set: 9780321751041: Computer Science Books @ Amazon.com
 神作镇楼。
+
+BLOG
+http://blog.csdn.net/v_july_v
