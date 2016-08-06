@@ -51,3 +51,40 @@ They’re very useful.
 
 Busy-ness
 Background noise.
+
+chapter 4
+It doesn’t matter how many times I have to click, as long as
+each click is a mindless, unambiguous choice.
+“three mindless, unambiguous clicks
+equal one click that requires thought.” 2
+
+The point is, we face choices all the time on the Web and making the choices
+mindless is one of the main things that make a site easy to use.
+
+chapter 5
+Omit needless
+words
+the art of not writing for the web
+
+Get rid of half the words on each page,
+then get rid of half of what’s left.
+—krug’s third law of usability
+
+17. Omit needless words.
+Vigorous writing is concise. A sentence should contain no
+unnecessary words, a paragraph no unnecessary sentences,
+for the same reason that a drawing should have no unnec-
+essary lines and a machine no unnecessary parts. 1
+
+
+Happy talk must die
+We all know happy talk when we see it: It’s the introductory text that’s supposed
+to welcome us to the site and tell us how great it is, or to tell us what we’re about
+to see in the section we’ve just entered.
+
+Instructions must die
+The other major source of needless words is instructions. The main thing you
+need to know about instructions is that no one is going to read them—at least not
+until after repeated attempts at “muddling through” have failed. And even then, if
+the instructions are wordy, the odds of users finding the information they need is
+pretty low.
