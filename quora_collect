@@ -493,3 +493,35 @@ what he’s trying to say with his clothing, accessories, other adornments like 
 any unusual accessories (murse, ethnic or fashion hats, gloves (fashion), tiaras, chains with emblems, unusual watches, excessive jewelry)
 Everything tells you something about a person, because everything that the person does, says, wears was a thought in his head, and serves a purpose in the way he likes to identify himself (either blend in or stand out) in society.
 
+What is the best comment in source code that you have ever encountered?
+Costya Perepelitsa
+Costya Perepelitsa
+238.3k Views · Upvoted by Jeff Nelson, Invented Chromebook, #Xoogler, Tapasweni Pathak, Developer @SAP Labs, Involved with open sources, Feminist., Phil Jones, and 5 others you follow
+Costya has 210+ answers in Computer Programming
+The best comment I've ever seen would have to be the Safety Pig:
+
+
+​
+I've never been quite sure how the pig was meant to help me handle the sketchy code just below it, but whatever it did, it worked.
+
+We ended up making the inclusion of a Safety Pig a part of our debugging and hardening process:
+"The way this code is structured makes memory leaks particularly difficult to spot. Add a Safety Pig and run your changes through valgrind before every commit."
+"The compiler can't ensure type safety here, so we added a Safety Pig just in case."
+"I don't have unit tests yet, but I did put in a Safety Pig." (almost worked)
+
+For those of you who'd like your very own Safety Pig (ignore the first line; Quora code blocks automatically remove starting whitespace in the first line):
+.
+                         _
+ _._ _..._ .-',     _.._(`))
+'-. `     '  /-._.-'    ',/
+   )         \            '.
+  / _    _    |             \
+ |  a    a    /              |
+ \   .-.                     ;  
+  '-('' ).-'       ,'       ;
+     '-;           |      .'
+        \           \    /
+        | 7  .__  _.-\   \
+        | |  |  ``/  /`  /
+       /,_|  |   /,_/   /
+          /,_/      '`-'
