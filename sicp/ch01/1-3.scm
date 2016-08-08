@@ -61,21 +61,16 @@
      dx))
 
 ;; 1.29
-(define (factor k)
-  (cond ((or (= k 0) (= k n))
-         1)
-        ((odd? k)
-         (else
-          2))))
 
-(define (integral3 f a b n)
-  (define h
-    (/ (- b a) n))
-  (define (y k)
-    (f (+ a (* k h))))
-  (* (sum f
-          ())
-     (/ h 3)
+
+;;(define (integral3 f a b n)
+;;  (define h
+;;    (/ (- b a) n))
+;;  (define (y k)
+;;    (f (+ a (* k h))))
+;;  (* (sum f
+;;          ())
+;;     (/ h 3)))
 
 (define (f x y)
   (define (f-helper a b)
@@ -155,5 +150,103 @@
 ;;(fixed-point (lambda (x) (+ 1 (/ 1 x))) 1.0)
 
 
+(define golden-ratio
+    (fixed-point (lambda (x) 
+                     (+ 1 (/ 1 x)))
+                 1.0))
+
+
+
+;; 1.36
+(define (fixed-point1 f first-guess)
+                
+    (define (close-enough? v1 v2)
+        (< (abs (- v1 v2)) tolerance))
+
+    (define (try guess step)
+        (display-info guess step)                       ; 每次进入测试时打印一次猜测
+        (let ((next (f guess)))
+            (if (close-enough? next guess)
+                (begin                                  ; 如果猜测完成
+                    (display-info next (+ 1 step))      ; 记得算上最后一次计算 next 的猜测
+                    next)
+                (try next (+ 1 step)))))
+
+    (try first-guess 1))
+
+(define (display-info guess step)
+    (display "Step: ")
+    (display step)
+    (display " ")
+    
+    (display "Guess: ")
+    (display guess)
+    (newline))
+
+(define (average-damp f)
+    (lambda (x)
+        (average x 
+                 (f x))))
+
+(define formula 
+    (lambda (x)
+        (/ (log 1000) 
+           (log x))))
+
+
+
+;; 1.37
+(define (cont-frac n d k)
+  (define (cf i)
+    (if (= k i)
+        (/ (n k) (d k))
+        (/ (n i)
+           (+ (d i) (cf (+ i 1))))))
+  (cf 1))
+
+
+(define (cont-frac1 N D k)
+
+    (define (iter i result)
+        (if (= i 0)
+            result
+            (iter (- i 1)
+                  (/ (N i)
+                     (+ (D i) result)))))
+
+    (iter (- k 1)
+          (/ (N k) (D k))))
+
+(define (golden-ratio1 k)
+    (+ 1
+       (cont-frac (lambda (i) 1.0)
+                  (lambda (i) 1.0)
+                  k)))
+;; 1.38
+(define (e k)
+
+    (define (N i)
+        1)
+
+    (define (D i)
+        (if (= 0 (remainder (+ i 1) 3))
+            (* 2 (/ (+ i 1) 3))
+            1))
+
+    (+ 2.0 
+       (cont-frac N D k)))
+
+;; 1.39
+(define (tan-cf x k)
+    
+    (define (N i)
+        (if (= i 1)
+            x
+            (- (square x))))
+
+    (define (D i)
+        (- (* i 2) 1))
+
+    (exact->inexact (cont-frac N D k)))
 
 
