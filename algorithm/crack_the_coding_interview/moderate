@@ -1,0 +1,33 @@
+19.4	 Write a method which finds the maximum of two numbers. You should not use if-else
+or any other comparison operator.
+EXAMPLE
+Input: 5, 10
+Output: 10
+		
+pg 89
+SOLUTION
+Let’s try to solve this by “re-wording” the problem. We will re-word the problem until we get
+something that has removed all if statements.
+Rewording 1: If a > b, return a; else, return b.
+Rewording 2: If (a - b) is negative, return b; else, return a.
+Rewording 3: If (a - b) is negative, let k = 1; else, let k = 0. Return a - k * (a - b).
+Rewording 4: Let c = a - b. Let k = the most significant bit of c. Return a - k * c.
+We have now reworded the problem into something that fits the requirements. The code
+for this is below.
+1	
+2	
+3	
+4	
+5	
+6	
+int
+	
+	
+	
+	
+}
+269
+getMax(int a, int b) {
+int c = a - b;
+int k = (c >> 31) & 0x1;
+int max = a -

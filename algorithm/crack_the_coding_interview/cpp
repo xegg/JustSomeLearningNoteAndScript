@@ -1,0 +1,234 @@
+13.1	 Write a method to print the last K lines of an input file using C++.
+			
+pg 76
+SOLUTION
+One brute force way could be to count the number of lines (N) and then print from N-10 to
+Nth line. But, this requires two reads of the file – potentially very costly if the file is large.
+We need a solution which allows us to read just once and be able to print the last K lines. We
+can create extra space for K lines and then store each set of K lines in the array. So, initially,
+our array has lines 0 through 9, then 1 through 10, then 2 through 11, etc (if K = 10). Each
+time that we read a new line, we purge the oldest line from the array. Instead of shifting the
+array each time (very inefficient), we will use a circular array. This will allow us to always find
+the oldest element in O(1) time.
+
+string L[K];
+int lines = 0;
+while (file.good()) {
+	
+getline(file, L[lines % K]); // read file line by line
+	
+++lines;
+}
+// if less than K lines were read, print them all
+int start, count;
+if (lines < K) {
+	
+start = 0;
+	
+count = lines;
+} else {
+	
+start = lines % K;
+	
+count = K;
+}
+for (int i = 0; i < count; ++i) {
+	
+cout << L[(start + i) % K] << endl;
+}
+OBSERVATIONS AND SUGGESTIONS:
+» »
+Note, if you do printf(L[(index + i) % K]) when there are %’s in the string, bad things will
+happen.
+
+
+13.2	 Compare and contrast a hash table vs. an STL map. How is a hash table implemented?
+If the number of inputs is small, what data structure options can be used instead of
+a hash table?
+	
+pg 76
+SOLUTION
+Compare and contrast Hash Table vs. STL map
+In a hash table, a value is stored by applying hash function on a key. Thus, values are not
+stored in a hash table in sorted order. Additionally, since hash tables use the key to find the
+index that will store the value, an insert/lookup can be done in amortised O(1) time (assum-
+ing only a few collisions in the hashtable). One must also handle potential collisions in a
+hashtable.
+In an STL map, insertion of key/value pair is in sorted order of key. It uses a tree to store
+values, which is why an O(log N) insert/lookup is required. There is also no need to handle
+collisions. An STL map works well for things like:
+» » find min element
+» » find max element
+» » print elements in sorted order
+» » find the exact element or, if the element is not found, find the next smallest number
+How is a hash table implemented?
+1.	 A good hash function is required (e.g.: operation % prime number) to ensure that the
+hash values are uniformly distributed.
+2.	 A collision resolving method is also needed: chaining (good for dense table entries),
+probing (good for sparse table entries), etc.
+3.	 Implement methods to dynamically increase or decrease the hash table size on a given
+criterion. For example, when the [number of elements] by [table size] ratio is greater
+than the fixed threshold, increase the hash table size by creating a new hash table and
+transfer the entries from the old table to the new table by computing the index using
+new hash function.
+What can be used instead of a hash table, if the number of inputs is small?
+You can use an STL map. Although this takes O(log n) time, since the number of inputs is
+small, this time is negligible.
+
+13.4	 What is the difference between deep copy and shallow copy? Explain how you would
+use each.
+	
+pg 76
+SOLUTION
+struct Test {
+	
+char * ptr;
+};
+void shallow_copy(Test & src, Test & dest) {
+	
+dest.ptr = src.ptr;
+}
+void deep_copy(Test & src, Test & dest) {
+	
+dest.ptr = malloc(strlen(src.ptr) + 1);
+	
+memcpy(dest.ptr, src.ptr);
+}
+Note that shallow_copy may cause a lot of programming run-time errors, especially with the
+creation and deletion of objects. Shallow copy should be used very carefully and only when
+a programmer really understands what he wants to do. In most cases shallow copy is used
+when there is a need to pass information about a complex structure without actual duplica-
+tion of data (e.g., call by reference). One must also be careful with destruction of shallow
+copy.
+In real life, shallow copy is rarely used. There is an important programming concept called
+“smart pointer” that, in some sense, is an enhancement of the shallow copy concept.
+Deep copy should be used in most cases, especially when the size of the copied structure is
+small.
+
+
+
+13.5	 What is the significance of the keyword “volatile” in C?
+		
+pg 76
+SOLUTION
+Volatile informs the compiler that the value of the variable can change from the outside,
+without any update done by the code.
+Declaring a simple volatile variable:
+volatile int x;
+int volatile x;
+Declaring a pointer variable for a volatile memory (only the pointer address is volatile):
+volatile int * x;
+int volatile * x;
+Declaring a volatile pointer variable for a non-volatile memory (only memory contained is
+volatile):
+int * volatile x;
+Declaring a volatile variable pointer for a volatile memory (both pointer address and memo-
+ry contained are volatile):
+volatile int * volatile x;
+int volatile * volatile x;
+Volatile variables are not optimized, but this can actually be useful. Imagine this function:
+1	
+2	
+3	
+4	
+5	
+6	
+int opt = 1;
+void Fn(void) {
+	
+start:
+		
+if (opt == 1) goto start;
+		
+else break;
+}
+At first glance, our code appears to loop infinitely. The compiler will try to optimize it to:
+1	
+2	
+3	
+4	
+5	
+6	
+void Fn(void) {
+	
+start:
+		
+int opt = 1;
+		
+if (true)
+		
+goto start;
+}
+This becomes an infinite loop. However, an external program might write ‘0’ to the location
+of variable opt. Volatile variables are also useful when multi-threaded programs have global
+variables and any thread can modify these shared variables. Of course, we don’t want opti-
+mization on them.
+
+
+13.6	 What is name hiding in C++?	
+		
+pg 76
+SOLUTION
+Let us explain through an example. In C++, when you have a class with an overloaded meth-
+od, and you then extend and override that method, you must override all of the overloaded
+methods.
+For example:
+1	
+2	
+3	
+4	
+5	
+6	
+7	
+8	
+9	
+10	
+11	
+class FirstClass {
+public:
+	
+virtual void MethodA (int);
+	
+virtual void MethodA (int, int);
+};
+void FirstClass::MethodA (int i) {
+	
+std::cout << “ONE!!\n”;
+}
+void FirstClass::MethodA (int i, int j) {
+	
+std::cout << “TWO!!\n”;
+}
+This is a simple class with two methods (or one overloaded method). If you want to override
+the one-parameter version, you can do the following:
+1	
+2	
+3	
+4	
+5	
+6	
+7	
+8	
+9	
+10	
+11	
+12	
+class SecondClass : public FirstClass {
+public:
+	
+void MethodA (int);
+};
+void SecondClass::MethodA (int i) {
+	
+std::cout << “THREE!!\n”;
+}
+void main () {
+	
+SecondClass a;
+	
+a.MethodA (1);
+	
+a.MethodA (1, 1);
+}
+However, the second call won’t work, since the two-parameter MethodA is not visible. That
+is name hiding.
