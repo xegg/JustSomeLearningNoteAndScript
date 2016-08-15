@@ -250,3 +250,125 @@
     (exact->inexact (cont-frac N D k)))
 
 
+;; 1.3.4
+(define (sqrt2 x)
+  (fixed-point (average-damp (lambda (y) (/ x y)))
+                             1.0))
+
+(define (deriv g)
+  (lambda (x)
+    (/ (- (g (+ x dx)) (g x))
+       dx)))
+
+(define dx 0.000001)
+
+(define (newton-transform g)
+  (lambda (x)
+    (- x (/ (g x) ((deriv g) x)))))
+
+(define (newton-method g guess)
+  (fixed-point (newton-transform g) guess))
+
+(define (sqrt3 x)
+  (newton-method (lambda (y) (- (square y) x))
+                 1.0))
+
+(define (fixed-point-of-transform g transform guess)
+  (fixed-point (transform g) guess))
+
+
+;; 1.40
+(define (cubic a b c)
+    (lambda (x)
+        (+ (cube x)
+           (* a (square x))
+           (* b x)
+           c)))
+
+;; 1.41
+(define (double f)
+    (lambda (x)
+        (f (f x))))
+
+;; 1.42
+(define (compose f g)
+  (lambda (x)
+    (f (g x))))
+
+;; 1.43
+(define (repeated f n)
+  (if (= n 1)
+      f
+      (lambda (x)
+        (let ((fs (repeated f (- n 1))))
+          (f (fs x))))))
+
+(define (repeated1 f n)
+    (if (= n 1)
+        f
+        (compose f
+                 (repeated f (- n 1)))))
+
+(define (repeated2 f n)
+    (define (iter i repeated-f)
+        (if (= i 1)
+            repeated-f
+            (iter (- i 1)
+                  (compose f repeated-f))))
+    (iter n f))
+
+
+;; 1.44
+
+(define (smooth f)
+    (lambda (x)
+        (/ (+ (f (- x dx))
+              (f x)
+              (f (+ x dx)))
+            3)))
+
+;; 1.45
+
+(define (expt base n)
+    (if (= n 0)
+        1
+        ((repeated (lambda (x) (* base x)) n) 1)))
+
+
+(define (average-damp-n-times f n)
+    ((repeated average-damp n) f))
+
+
+(define (damped-nth-root n damp-times)
+    (lambda (x)
+        (fixed-point 
+            (average-damp-n-times 
+                (lambda (y) 
+                    (/ x (expt y (- n 1)))) 
+                damp-times)
+            1.0)))
+
+(define (lg n)
+    (cond ((> (/ n 2) 1)
+            (+ 1 (lg (/ n 2))))
+          ((< (/ n 2) 1)
+            0)
+          (else
+            1)))
+
+
+(define (nth-root n)
+    (damped-nth-root n (lg n)))
+
+;; 1.46
+(define (fixed-point3 f close-enough?)
+    (lambda (first-guess)
+        (define (try guess)
+            (let ((next (f guess)))
+                (if (close-enough? guess next)
+                    next
+                    (try next))))
+        (try first-guess)))
+
+(define (close-enough?3 v1 v2)
+        (< (abs (- v1 v2)) tolerance))
