@@ -318,3 +318,6 @@ gsettings set com.canonical.Unity.Launcher launcher-position Bottom
 gsettings set com.canonical.Unity.Launcher launcher-position Left
 
 PubkeyAcceptedKeyTypes=+ssh-dss
+
+解压乱码问题
+unzip -O CP936 xxx.zip (用GBK, GB18030也可以)
