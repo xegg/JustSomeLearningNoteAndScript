@@ -182,3 +182,51 @@
         (mobile-balance? (branch-structure branch))  ; 那么(递归地)检查子活动体的平衡性
         #t))                                        ; 否则，返回 #t
 
+
+(define (scale-tree tree factor)
+  (cond ((null? tree) nil)
+        ((not (pair? tree)) (* tree factor))
+        (else (cons (scale-tree (car tree) factor)
+                    (scale-tree (cdr tree) factor)))))
+
+(define (scale-tree tree factor)
+  (map (lambda (sub-tree)
+         (if (pair? sub-tree)
+           (scal-tree sub-tree factor)
+           (* sub-tree factor)))
+         tree))
+
+;; 2.30
+(define (square-tree tree)
+    (cond ((null? tree)                         ; 空树
+            '())
+          ((not (pair? tree))                   ; 叶子节点
+            (square tree))
+          (else 
+            (cons (square-tree (car tree))
+                  (square-tree (cdr tree))))))
+
+(define (square-tree tree)
+    (map (lambda (sub-tree)
+             (if (pair? sub-tree)           ; 如果有左右子树
+                 (square-tree sub-tree)     ; 那么递归地处理它们
+                 (square sub-tree)))
+         tree))
+;; 2.31
+(define (tree-map f tree)
+    (cond ((null? tree)                         ; 空树
+            '())
+          ((not (pair? tree))                   ; 叶子节点
+            (f tree))
+          (else
+            (cons (tree-map f (car tree))       ; 递归处理左右子树
+                  (tree-map f (cdr tree))))))
+
+;; 2.32
+(define (subsets s)
+    (if (null? s)
+        (list '())
+        (let ((rest (subsets (cdr s))))
+            (append rest (map (lambda (x)
+                                (cons (car s) x))
+                              rest)))))
