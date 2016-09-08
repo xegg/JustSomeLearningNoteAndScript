@@ -66,3 +66,13 @@ git show 27cf8e84bb88e24ae4b4b3df2b77aab91a3735d8:my_file.txt > my_file.txt.OLD
 
 <!--reset add before commit-->
 git reset
+
+git filter-branch --env-filter \
+    'if [ $GIT_COMMIT = 119f9ecf58069b265ab22f1f97d2b648faf932e0 ]
+     then
+         export GIT_AUTHOR_DATE="Thur Sep 8 21:38:53 2009 -0800"
+         export GIT_COMMITTER_DATE="Sat May 19 01:01:01 2007 -0700"
+     fi'
+
+
+GIT_COMMITTER_DATE="Thur Sep 8 21:38:53 2016 +0800" git commit --amend --date "Thur Sep 8 21:38:53 2016 +0800"
