@@ -321,3 +321,5 @@ PubkeyAcceptedKeyTypes=+ssh-dss
 
 解压乱码问题
 unzip -O CP936 xxx.zip (用GBK, GB18030也可以)
+
+redis-cli KEYS "prefix:*" | xargs redis-cli DEL
