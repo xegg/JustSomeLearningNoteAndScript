@@ -72,21 +72,24 @@ yourself how you would figure out which bits in two numbers are different. Simpl
 xor.
 Each 1 in the xor will represent one different bit between A and B. We then simply need to
 count the number of bits that are 1.
-1	
-2	
-3	
-4	
-5	
-6	
-7	
+
 public static int bitSwapRequired(int a, int b) {
-	
-int count = 0;
-	
-for (int c = a ^ b; c != 0; c = c >> 1) {
-		
-count += c & 1;
-	
-}
-	
+	int count = 0;
+	for (int c = a ^ b; c != 0; c = c >> 1) {
+		count += c & 1;
+	}
 return count
+}
+
+5.6	
+Write a program to swap odd and even bits in an integer with as few instructions as
+possible (e.g., bit 0 and bit 1 are swapped, bit 2 and bit 3 are swapped, etc).
+				
+pg 58
+SOLUTION
+Mask all odd bits with 10101010 in binary (which is 0xAA), then shift them left to put them in
+the even bits. Then, perform a similar operation for even bits. This takes a total 5 instructions.
+
+public static int swapOddEvenBits(int x) {
+	return ( ((x & 0xaaaaaaaa) >> 1) | ((x & 0x55555555) << 1) );
+}
