@@ -1,0 +1,33 @@
+10.3	 Given two lines on a Cartesian plane, determine whether the two lines would inter-
+sect.
+	
+pg 68
+SOLUTION
+There are a lot of unknowns in this problem (what format are the lines in? What if they are the
+same line?), but let’s assume:
+» » If two lines are the same (same line = same slope and y-intercept), they are considered
+to intersect.
+» » We get to decide the data structure.
+public class Line {
+	static double epsilon = 0.000001;
+	public double slope;
+	public double yintercept;
+	
+public Line(double s, double y) { 
+slope = s; 
+yintercept = y; 
+} 
+public boolean intersect(Line line2) { 
+return Math.abs(slope - line2.slope) > epsilon || 
+Math.abs(yintercept - line2.yintercept) < epsilon; 
+} }
+OBSERVATIONS AND SUGGESTIONS:
+» » Ask questions. This question has a lot of unknowns—ask questions to clarify them. Many
+interviewers intentionally ask vague questions to see if you’ll clarify your assumptions.
+» » When possible, design and use data structures. It shows that you understand and care
+about object oriented design.
+» » Think through which data structures you design to represent a line. There are a lot of
+options, with lots of trade offs. Pick one and explain your choice.
+» » Don’t assume that the slope and y-intercept are integers.
+» » Understand limitations of floating point representations. Never check for equality with
+==.
