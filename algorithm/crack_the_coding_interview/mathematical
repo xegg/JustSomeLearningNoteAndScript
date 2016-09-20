@@ -31,3 +31,83 @@ options, with lots of trade offs. Pick one and explain your choice.
 » » Don’t assume that the slope and y-intercept are integers.
 » » Understand limitations of floating point representations. Never check for equality with
 ==.
+
+10.7	 Design an algorithm to find the kth number such that the only prime factors are 3,
+5, and 7.
+				
+pg 68
+SOLUTION
+Any such number will look like (3^i)*(5^j)*(7^k). Here are the first 13 numbers:
+1 - 3^0 * 5^0 * 7 ^ 0
+3 3 3^1 * 5^0 * 7 ^ 0
+5 5 3^0 * 5^1 * 7 ^ 0
+7 7 3^0 * 5^0 * 7 ^ 1
+9 3*3 3^2 * 5^0 * 7 ^ 0
+15 3*5 3^1 * 5^1 * 7 ^ 0
+21 3*7 3^1 * 5^0 * 7 ^ 1
+25 5*5 3^0 * 5^2 * 7 ^ 0
+27 3*9 3^3 * 5^0 * 7 ^ 0
+35 5*7 3^0 * 5^1 * 7 ^1
+45 5*9 3^2 * 5^1 * 7 ^0
+49 7*7 3^0 * 5^0 * 7 ^2
+63 3*21 3^2 * 5^0 * 7 ^1
+» » 3 * (previous number in list)
+» » 5 * (previous number in list)
+» » 7 * (previous number in list)
+How would we find the next number in the list? Well, we could multiply 3, 5 and 7 times each
+number in the list and find the smallest element that has not yet been added to our list. This
+solution is O(n^2). Not bad, but I think we can do better.
+In our current algorithm, we’re doing 3*1, 3*3, 3*5, 3*7, 3*9, 3*15, 3*21, 3*25 ..., and the same
+for 5 and 7. We’ve already done almost all this work before—why are we doing it again?
+We can fix this by multiplying each number we add to our list by 3, 5, 7 and putting the re-
+sults in one of the three first-in-first-out queues. To look for the next “magic” number, we pick
+the smallest element in the three queues. Here is the algorithm:
+
+Initialize array magic and queues Q3, Q5 and Q7
+Insert 1 into magic.
+Insert 1*3, 1*5 and 1*7 into Q3, Q5 and Q7 respectively.
+Let x be the minimum element in Q3, Q5 and Q7. Append x to magic.
+If x was found in:
+Cracking the Coding Interview | Concepts and AlgorithmsSolutions to Chapter 10 | Mathematical
+	
+Q3 -> append x*3, x*5 and x*7 to Q3, Q5 and Q7. Remove x from Q3.
+Q5 -> append x*5 and x*7 to Q5 and Q7. Remove x from Q5.
+Q7 -> only append x*7 to Q7. Remove x from Q7.
+Note: we do not need to append x*3 and x*5 to all lists because
+they will already be found in another list.
+6. Repeat steps 4 - 6 until we’ve found k elements.
+
+public static int getKthMagicNumber(int k) {
+	if (k <= 0) return 0;
+	int val = 1;
+	Queue<Integer> Q3 = new LinkedList<Integer>();
+	Queue<Integer> Q5 = new LinkedList<Integer>();
+	Queue<Integer> Q7 = new LinkedList<Integer>();
+	Q3.add(3);
+	Q5.add(5);
+	Q7.add(7);
+	for (--k; k > 0; --k) { // We’ve done one iteration already.
+		val = Math.min(Q3.peek().intValue(),
+			Math.min(Q5.peek().inValue(), Q7.peek().intValue()));
+		if (val == Q7.peek()) {
+			Q7.remove();
+		} else {
+			if (val == Q5.peek()) {
+				Q5.remove();
+			} else { // must be from Q3
+				Q3.remove();
+				Q3.add(val * 3);
+			}
+			Q5.add(val * 5);
+		}
+		Q7.add(val * 7);
+	}
+	return val;
+} OBSERVATIONS AND SUGGESTIONS:
+
+When you get this question, do your best to solve it—even though it’s really difficult. Explain
+a brute force approach (not as tricky) and then start thinking about how you can optimize it.
+Or, try to find a pattern in the numbers.
+Chances are, your interviewer will help you along when you get stuck. Whatever you do,
+don’t give up! Think out loud, wonder aloud, explain your thought process. Your interviewer
+will probably jump in to guide you.
