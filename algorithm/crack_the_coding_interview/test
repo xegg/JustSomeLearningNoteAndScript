@@ -116,3 +116,44 @@ In an interview, we should ask about which kind of application is being run. Thi
 may give you some idea about the kind of error the interviewer is looking for. For example,
 a web server is more prone to memory leakage, whereas a program that runs close to the
 system level is more prone to crashes due to system dependencies.
+
+12.3	 We have the following method used in a chess game: boolean canMoveTo(int x, int y)
+x and y are the coordinates of the chess board and it returns whether or not the piece
+can move to that position. Explain how you would test this method.
+	
+SOLUTION
+There are two primary types of testing we should do:
+Validation of input/output:
+We should validate both the input and output to make sure that each are valid. This might
+entail:
+1.	
+Checking whether input is within the board limit.
+» » Attempt to pass in negative numbers
+» » Attempt to pass in x which is larger than the width
+» » Attempt to pass in y which is larger than the width
+Depending on the implementation, these should either return false or throw an excep-
+tion.
+2.	
+Checking if output is within the valid set of return values. (Not an issue in this case,
+since there are no “invalid” boolean values.)
+Functional testing:
+Ideally, we would like to test every possible board, but this is far too big. We can do a reason-
+able coverage of boards however. There are 6 pieces in chess, so we need to do something
+like this:
+1	
+2	
+3	
+4	
+5	
+6	
+foreach piece a:
+	
+for each other type of piece b (6 types + empty space)
+		
+foreach direction d
+			
+Create a board with piece a.
+			
+Place piece b in direction d.
+			
+Try to move – check return value.
