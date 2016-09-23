@@ -173,62 +173,29 @@ Let us explain through an example. In C++, when you have a class with an overloa
 od, and you then extend and override that method, you must override all of the overloaded
 methods.
 For example:
-1	
-2	
-3	
-4	
-5	
-6	
-7	
-8	
-9	
-10	
-11	
 class FirstClass {
 public:
-	
-virtual void MethodA (int);
-	
-virtual void MethodA (int, int);
+	virtual void MethodA (int);
+	virtual void MethodA (int, int);
 };
 void FirstClass::MethodA (int i) {
-	
-std::cout << “ONE!!\n”;
+	std::cout << “ONE!!\n”;
 }
 void FirstClass::MethodA (int i, int j) {
-	
-std::cout << “TWO!!\n”;
+	std::cout << “TWO!!\n”;
 }
 This is a simple class with two methods (or one overloaded method). If you want to override
 the one-parameter version, you can do the following:
-1	
-2	
-3	
-4	
-5	
-6	
-7	
-8	
-9	
-10	
-11	
-12	
 class SecondClass : public FirstClass {
-public:
-	
+public: 
 void MethodA (int);
 };
 void SecondClass::MethodA (int i) {
-	
-std::cout << “THREE!!\n”;
-}
-void main () {
-	
-SecondClass a;
-	
-a.MethodA (1);
-	
-a.MethodA (1, 1);
+	std::cout << “THREE!!\n”;
+} void main () {
+	SecondClass a;
+	a.MethodA (1);
+	a.MethodA (1, 1);
 }
 However, the second call won’t work, since the two-parameter MethodA is not visible. That
 is name hiding.
