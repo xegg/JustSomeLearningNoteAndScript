@@ -140,20 +140,32 @@ Functional testing:
 Ideally, we would like to test every possible board, but this is far too big. We can do a reason-
 able coverage of boards however. There are 6 pieces in chess, so we need to do something
 like this:
-1	
-2	
-3	
-4	
-5	
-6	
+
 foreach piece a:
+	for each other type of piece b (6 types + empty space)
+		foreach direction d
+			Create a board with piece a.
+			Place piece b in direction d.
+			Try to move – check return value.
+
+12.4	 How would you load test a webpage without using any test tools?
 	
-for each other type of piece b (6 types + empty space)
-		
-foreach direction d
-			
-Create a board with piece a.
-			
-Place piece b in direction d.
-			
-Try to move – check return value.
+pg 70
+SOLUTION
+Load testing helps to identify a web application’s maximum operating capacity, as well as
+any bottlenecks that may interfere with its performance. Similarly, it can check how an ap-
+plication responds to variations in load.
+To perform load testing, we must first identify the performance-critical scenarios and the
+metrics which fulfill our performance objectives. Typical criteria include:
+» » response time
+» » throughput
+» » resource utilization
+» » maximum load that the system can bear.
+Then, we design tests to simulate the load, taking care to measure each of these criteria.
+In the absence of formal testing tools, we can basically create our own. For example, we
+could simulate concurrent users by creating thousands of virtual users. We would write a
+multi-threaded program with thousands of threads, where each thread acts as a real-world
+user loading the page. For each user, we would programmatically measure response time,
+data I/O, etc.
+We would then analyze the results based on the data gathered during the tests and compare
+it with the accepted values.
