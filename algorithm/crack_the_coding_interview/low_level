@@ -1,0 +1,105 @@
+16.1	 Explain the following terms: virtual memory, page fault, thrashing.
+	
+SOLUTION
+Virtual memory is a computer system technique which gives an application program the im-
+pression that it has contiguous working memory (an address space), while in fact it may be
+physically fragmented and may even overflow on to disk storage. Systems that use this tech-
+nique make programming of large applications easier and use real physical memory (e.g.
+RAM) more efficiently than those without virtual memory.
+http://en.wikipedia.org/wiki/Virtual_memory
+
+Page Fault: A page is a fixed-length block of memory that is used as a unit of transfer be-
+tween physical memory and external storage like a disk, and a page fault is an interrupt (or
+exception) to the software raised by the hardware, when a program accesses a page that is
+mapped in address space, but not loaded in physical memory.
+http://en.wikipedia.org/wiki/Page_fault
+
+Thrash is the term used to describe a degenerate situation on a computer where increas-
+ing resources are used to do a decreasing amount of work. In this situation the system is
+said to be thrashing. Usually it refers to two or more processes accessing a shared resource
+repeatedly such that serious system performance degradation occurs because the system is
+spending a disproportionate amount of time just accessing the shared resource. Resource
+access time may generally be considered as wasted, since it does not contribute to the ad-
+vancement of any process. In modern computers, thrashing may occur in the paging system
+(if there is not ‘sufficient’ physical memory or the disk access time is overly long), or in the
+communications system (especially in conflicts over internal bus access), etc.
+http://en.wikipedia.org/wiki/Thrash_(computer_science)
+
+
+16.2	 What is a Branch Target buffer? Explain how it can be used in reducing bubble cycles
+in cases of branch misprediction.
+	
+	
+pg 82
+SOLUTION
+Branch misprediction occurs when the CPU mispredicts the next instruction to be executed.
+The CPU uses pipelining which allows several instructions to be processed simultaneously.
+But during a conditional jump, the next instruction to be executed depends on the result of
+the condition. Branch Prediction tries to guess the next instruction. However, if the guess is
+wrong, we are penalized because the instruction which was executed must be discarded.
+Branch Target Buffer (BTB) reduces the penalty by predicting the path of the branch, comput-
+ing the target of the branch and caching the information used by the branch. There will be
+no stalls if the branch entry found on BTB and the prediction is correct, otherwise the penalty
+will be at least two cycles.
+
+
+16.3	 Describe direct memory access (DMA). Can a user level buffer / pointer be used by
+kernel or drivers?
+	
+SOLUTION
+Direct Memory is a feature which provides direct access (read/write) to system memory with-
+out interaction from the CPU. The “DMA Controller” manages this by requesting the System
+bus access (DMA request) from CPU. CPU completes its current task and grants access by as-
+serting DMA acknowledgement signal. Once it gets the access, it reads/writes the data and
+returns back the system bus to the CPU by asserting the bus release signal. This transfer is
+faster than the usual transfer by CPU. Between this time CPU is involved with processing task
+which doesn’t require memory access.
+By using DMA, drivers can access the memory allocated to the user level buffer / pointer.
+
+16.4	 Write a step by step execution of things that happen after a user presses a key on the
+keyboard. Use as much detail as possible.
+	
+SOLUTION
+1.	 The keyboard sends a scan code of the key to the keyboard controller (Scan code for
+key pressed and key released is different).
+2.	 The keyboard controller interprets the scan code and stores it in a buffer.
+3.	 The keyboard controller sends a hardware interrupt to the processor. This is done by
+putting signal on “interrupt request line”: IRQ 1.
+4.	 The interrupt controller maps IRQ 1 into INT 9.
+5.	 An interrupt is a signal which tells the processor to stop what it was doing currently
+and do some special task.
+6.	 The processor invokes the “Interrupt handler”. CPU fetches the address of “Interrupt
+Service Routine” (ISR) from “Interrupt Vector Table” maintained by the OS (Processor
+use the IRQ number for this).
+7.	 The ISR reads the scan code from port 60h and decides whether to process it or pass
+the control to program for taking action.
+
+
+16.5	 Write a program to find whether a machine is big endian or little endian.
+	
+SOLUTION
+#define BIG_ENDIAN 0
+#define LITTLE_ENDIAN 1
+int TestByteOrder() {
+	short int word = 0x0001;
+	char *byte = (char *) &word;
+	return (byte[0] ? LITTLE_ENDIAN : BIG_ENDIAN);
+}
+
+16.7	 What are the best practices to prevent reverse engineering of DLLs?	
+	
+SOLUTION
+Best practices include the following:
+» » Use obfuscators.
+» » Do not store any data (string, etc) in open form. Always compress or encode it.
+» » Use a static link so there is no DLL to attack.
+» » Strip all symbols.
+» » Use a .DEF file and an import library to have anonymous exports known only by their
+export ids.
+» » Keep the DLL in a resource and expose it in the file system (under a suitably obscure
+name, perhaps even generated at run time) only when running.
+» » Hide all real functions behind a factory method that exchanges a secret (better, proof of
+knowledge of a secret) for a table of function pointers to the real methods.
+» » Use anti-debugging techniques borrowed from the malware world to prevent reverse
+engineering. (Note that this will likely get you false positives from AV tools.)
+» » Use protectors.
