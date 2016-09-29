@@ -1,0 +1,42 @@
+18.1	 What’s the difference between a thread and a process?
+	
+SOLUTION
+Processes and threads are related to each other but are fundamentally different.
+A process can be thought of as an instance of a program in execution. Each process is an in-
+dependent entity to which system resources (CPU time, memory, etc.) are allocated and each
+process is executed in a separate address space. One process cannot access the variables
+and data structures of another process. If you wish to access another process’ resources,
+inter-process communications have to be used such as pipes, files, sockets etc.
+A thread uses the same stack space of a process. A process can have multiple threads. A key
+difference between processes and threads is that multiple threads share parts of their state.
+Typically, one allows multiple threads to read and write the same memory (no processes can
+directly access the memory of another process). However, each thread still has its own regis-
+ters and its own stack, but other threads can read and write the stack memory.
+A thread is a particular execution path of a process; when one thread modifies a process
+resource, the change is immediately visible to sibling threads.
+
+18.2	 How can you measure the time spent in a context switch?
+	
+SOLUTION
+This is a tricky question, but let’s start with a possible solution.
+A context switch is the time spent switching between two processes (e.g., bringing a wait-
+ing process into execution and sending an executing process into waiting/terminated state).
+This happens in multitasking. The operating system must bring the state information of
+waiting processes into memory and save the state information of the running process.
+In order to solve this problem, we would like to record timestamps of the last and first in-
+struction of the swapping processes. The context switching time would be the difference in
+the timestamps between the two processes.
+Let’s take an easy example: Assume there are only two processes, P1 and P2.
+P1 is executing and P2 is waiting for execution. At some point, the OS must swap P1 and
+P2—let’s assume it happens at the Nth instruction of P1. So, the context switch time for this
+would be Time_Stamp(P2_1) – Time_Stamp(P2_N)
+Easy enough. The tricky part is this: how do we know when this swapping occurs? Swap-
+ping is governed by the scheduling algorithm of the OS. We can not, of course, record the
+timestamp of every instruction in the process.
+Another issue: there are many kernel level threads which are also doing context switches,
+and the user does not have any control over them.
+Overall, we can say that this is mostly an approximate calculation which depends on the
+underlying OS. One approximation could be to record the end instruction timestamp of a
+process and start timestamp of a process and waiting time in queue.
+If the total timeof execution of all the processes was T, then the context switch time = T –
+(SUM for all processes (waiting time + execution time)).
