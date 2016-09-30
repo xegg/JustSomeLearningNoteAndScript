@@ -14,20 +14,67 @@ Rewording 3: If (a - b) is negative, let k = 1; else, let k = 0. Return a - k * 
 Rewording 4: Let c = a - b. Let k = the most significant bit of c. Return a - k * c.
 We have now reworded the problem into something that fits the requirements. The code
 for this is below.
-1	
-2	
-3	
-4	
-5	
-6	
-int
-	
-	
-	
-	
-}
-269
 getMax(int a, int b) {
 int c = a - b;
 int k = (c >> 31) & 0x1;
 int max = a -
+
+19.1	 Write a function to swap a number in place without temporary variables.
+			
+SOLUTION
+This is a classic interview problem. If you haven’t heard this problem before, you can ap-
+proach it by taking the difference between a and b:
+public static void swap(int a, int b) {
+	a = b - a; // 9 - 5 = 4
+	b = b - a; // 9 - 4 = 5
+	a = a + b; // 4 + 5 = 9
+		
+	System.out.println(“a: “ + a);
+	System.out.println(“b: “ + b);
+}
+You can then optimize it as follows:
+public static void swap_opt(int a, int b) {
+	a = a^b;
+	b = a^b;
+	a = a^b;
+	
+	System.out.println(“a: “ + a);
+	System.out.println(“b: “ + b);
+}
+
+19.5	 The Game of Master Mind is played as follows:	
+The computer has four slots containing balls that are red (R), yellow (Y), green (G) or
+blue (B). For example, the computer might have RGGB (e.g., Slot #1 is red, Slots #2 and
+#3 are green, Slot #4 is blue).
+You, the user, are trying to guess the solution. You might, for example, guess YRGB.
+When you guess the correct color for the correct slot, you get a “hit”. If you guess
+a color that exists but is in the wrong slot, you get a “pseudo-hit”. For example, the
+guess YRGB has 2 hits and one pseudo hit.
+For each guess, you are told the number of hits and pseudo-hits.
+Write a method that, given a guess and a solution, returns the number of hits and
+pseudo hits.
+		
+SOLUTION
+This problem is straight-forward. We simply check the number of hits and pseudo-hits. We
+will store the number of each in a class. To do a quick lookup to see it an element is a pseudo-
+hit, we will use a bit mask.
+public static class Result {
+	public int hits;
+	public int pseudoHits;
+};
+	public static Result estimate(String guess, String solution) {
+	Result res = new Result();
+	int solution_mask = 0;
+	for (int i = 0; i < 4; ++i) {
+		solution_mask |= 1 << (1 + solution.charAt(i) - ‘A’);
+	}
+	for (int i = 0; i < 4; ++i) {
+		if (guess.charAt(i) == solution.charAt(i)) {
+			++res.hits;
+		} else if ((solution_mask &
+				(1 << (1 + guess.charAt(i) - ‘A’))) >= 1) {
+			++res.pseudoHits;
+		}
+	 }
+	 return res;
+}
