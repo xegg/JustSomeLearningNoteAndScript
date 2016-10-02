@@ -109,3 +109,37 @@ maximum sum is either: (A) -3 (if you assume the subsequence can’t be empty)
 (B) 0 (the subsequence has length 0) or (C) MINIMUM_INT (essentially the error
 case). We went with option B (max sum = 0), but there’s no “correct” answer. This
 is a great thing to discuss with your interviewer to show how careful you are.
+
+19.8	 Design a method to find the frequency of occurrences of any given word in a book.
+	
+SOLUTION
+The first question – which you should ask your interviewer – is if you’re just asking for a
+single word (“single query”) or if you might, eventually, use the same method for many dif-
+ferent words (“repetitive queries”)? That is, are you simply asking for the frequency of “dog”,
+or might you ask for “dog,” and then “cat,” “mouse,” etc?
+Solution: Single Query
+In this case, we simply go through the book, word by word, and count the number of times
+that a word appears. This will take O(n) time. We know we can’t do better than that, as we
+must look at every word in the book.
+Solution: Repetitive Queries
+In this case, we create a hash table which maps from a word to a frequency. Our code is then
+like this:
+Hashtable<String, Integer> setupDictionary(String[] book) {
+	Hashtable<String, Integer> table =
+		new Hashtable<String, Integer>();
+	for (String word : book) {
+		word = word.toLowerCase();
+		if (word.trim() != “”) {
+			if (!table.containsKey(word)) table.put(word, 0);
+			table.put(word, table.get(word) + 1);
+		}
+	}
+	return table;
+} int getFrequency(Hashtable<String, Integer> table, String word) {
+	if (table == null || word == null) return -1;
+	word = word.toLowerCase();
+	if (table.containsKey(word)) {
+		return table.get(word);
+	}
+	
+return 0; }
