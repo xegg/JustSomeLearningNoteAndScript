@@ -208,7 +208,7 @@ each time you checkout some files of your repo, spaces can be converted in tabs,
 but when you check-in (and push and publish), those same files are stored back using only spaces.
 You can declare this filter driver (named here 'tabspace') in the .git/info/attributes (for a filter applied to all files within the Git repo), with the following content:
 
-*.py  filter=tabspace
+\*.py  filter=tabspace
 Now run the commands:
 
 # local config for the current repo
@@ -261,3 +261,10 @@ It's fairly common that git describe will be used in conjunction with git archiv
 Then did g clone github.com:torvalds/linux --depth 1 and it did cloned quite fast. And I have only one commit in git log.
 
 So clone --depth 1 should work. If you need to update existing repository, you should use git fetch origin branchname:branchname --depth 1. It works too, it fetches only one commit.
+
+
+--------------------------------------------------
+
+http://yaowenjie.github.io/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/gitignore-specific-line
+ingore specify line
+
