@@ -268,3 +268,6 @@ So clone --depth 1 should work. If you need to update existing repository, you s
 http://yaowenjie.github.io/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/gitignore-specific-line
 ingore specify line
 
+
+--------------------------------------------------
+git config core.filemode false
