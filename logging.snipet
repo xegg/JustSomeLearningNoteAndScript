@@ -303,3 +303,50 @@ What are our customers using our system to do?
 Monitoring
 How long is it taking to process a request?
 How much available memory is there?
+
+
+To log or not to log? This is an age-old question for developers. Logging everything can be great  because you have plenty of data to work from when you have a problem. But it’s not so great if you have to grep and inspect it all yourself. In my mind, developers should instead be thinking about logging the right events in the right format for the right consumer.
+
+Instrumentation is one of the most valuable sources of data you can log. At Loggly, we instrument like crazy in our code because we need to understand what our system is doing and where we can improve it. When you’re dealing with billions of events per day, the ability to quickly identify hot-spots is invaluable. However, there are lots of different opinions about what you should instrument and concerns about the performance impact of that instrumentation. What follows are the guidelines and best practices that we’ve developed to help ourselves do a better job of instrumentation. Hopefully they’ll help you too…
+
+Best Practice #1: Treat instrumentation as an ongoing, iterative process where you start by logging everything at a high level and then add deeper instrumentation as you find yourself asking “What happened here?”
+
+For every application, you’ll probably find that you’re logging too much data in some areas and not enough in others. If you find that you’re measuring something that consistently behaves well, you’re a very lucky person, and might be tempted to remove the instrumentation – but read #3 in this list before you do.
+
+In areas that are more variable or more expensive than you thought, instrument deeper. Keep going down this path until you understand where the time is going. If you’re lucky, you have a single component that is causing you grief. If not, at least you will have a deeper understanding of where the problem is coming from.
+
+Best Practice #2: Always instrument anything that goes out of process.
+
+For example, a call to your database “should always be fast” so you might be tempted not to instrument it. The problem is that distributed system problems are, by definition, not well behaved. In fact, these things that you thought would never cause a problem can actually be indicative of a larger problem in your system, like the Canary in the Coal Mine.
+
+If you follow this best practice religiously, you’ll have a much better understanding of where the problems are in your system. If your web-head occasionally goes slow and your app server has a corresponding hiccup, then you can focus on the app server. If there isn’t a hiccup deeper in your stack, then dive deeper into your web-head.
+
+Best Practice #3: Always log unacceptable performance.
+
+If you expect some part of your system to perform at a certain level, you should make sure you log when it falls outside that range. For example, if your database “should always be fast”, then you can log any DB access that takes more than, say, 100ms. When the inevitable happens and the DB does slow down, you’ll see that this has happened immediately thanks to this logging. This is Trust But Verify: If you don’t think you need to log every request that’s fine, but make sure you’re logging the bad ones. Think of it as logging “Soft Exceptions.”
+
+Best Practice #4: If possible, always log enough context so that you get the complete picture of what happened from a single log event.
+
+For example, instead of logging the start and end of a process, log the end plus the elapsed time. This is not always possible, but when it is, it will save you a huge amount of time when things go wrong.
+
+Best Practice #5: View machines as your end consumer.
+
+Rather than creating logs that humans can read, create logs that your log management solution can interpret. Developers are reluctant to dump copious amounts of diagnostic data into logs because they think they’ll never be able to look at all of that data. And they’re right. Machines, on the other hand, don’t get tired eyes or carpal tunnel syndrome. In fact, they’re better at combing through lots of data (they love to eat JSON structured data) and giving back much more consumable insights. So let a machine-based solution like Loggly crunch the data and save your brain power for the problem solving.
+
+Best Practice #6: Trends tell the story better than data points.
+
+Being able to see how your system performs over time (i.e. period-over-period) will tell you more about what is really going on than any single data point. If you have full instrumentation, you can graph it over time and see how your system performance fluctuates throughout the day. Sometimes, however, it is simply not practical to log every single event that is flowing through your system, so you may need to implement rollups in your instrumentation code. In our Java code, we use a Metrics class that gives us counts and elapsed times every 10 seconds for every pipeline in the system. Graphing this data shows us exactly how we’re doing and helps us find slowdowns before they start causing problems.
+
+Best Practice #7: Instrumentation is NOT a substitute for profiling, and vice versa.
+
+If you have a serious performance issue in your code, instrumentation is probably not going to take you deep enough to find it. You should be profiling your code to get to the root cause. Conversely, if your code is running live in production, you almost certainly don’t want to attach a profiler to it. You should be using instrumentation to find the problem area.
+
+Think of instrumentation as your eyes and profiling as your microscope. Both have their uses, and both are infinitely better than being blindfolded, which is where you are when you don’t do either.
+
+Best Practice #8: Flying slower is better than flying blind.
+
+We’ve had, and continue to have, some vigorous debates about “overhead” when it comes to instrumentation. Engineers (rightly) don’t want to clutter up their code with things that make it run slower. But the benefits of instrumentation are so huge that we know we simply have to have it. Our debates these days are more about how much instrumentation to use, not whether we should use it. Without instrumentation, we wouldn’t be able to understand our systems’ performance, so the “speed” advantage of not instrumenting is somewhat illusory.
+
+Think about these best practices when you develop your next application. Best Practice #5 (View machines as your end consumer) in particular can be a real change in mindset. But once you make the shift, you’ll be so glad you did!
+
+So, how do you convince your development team to adopt these best practices? Read my follow-on post to get my perspective and tips.
