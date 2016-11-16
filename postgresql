@@ -74,3 +74,38 @@ SELECT * FROM person WHERE current_mood = 'happy';
 
 SELECT person.name, holidays.num_weeks FROM person, holidays
   WHERE person.current_mood::text = holidays.happiness::text;
+
+
+
+
+WITH 
+  cubed_data AS (
+     SELECT 
+        dimension1_id,
+        dimension2_id,
+        dimension3_id,
+        measure_id,
+        SUM(value) value
+     FROM
+        source_data
+     GROUP BY
+        CUBE(dimension1, dimension2, dimension3),
+        measure
+  ), 
+  dimension1_label AS(
+     SELECT 
+        dimension1_id,
+        dimension1_label
+     FROM 
+        labels 
+     WHERE 
+        object = 'dimension1'
+  ), ...
+SELECT 
+  *
+FROM  
+  cubed_data
+  JOIN dimension1_label USING (dimension1_id)
+  JOIN dimension2_label USING (dimension2_id)
+  JOIN dimension3_label USING (dimension3_id)
+  JOIN measure_label USING (measure_id)

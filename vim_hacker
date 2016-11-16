@@ -214,3 +214,6 @@ You may want a record of the recent locations where changes occurred in the curr
 put each numeric register successively (where the dot is the Vim repeat operator).
 
 gg=G formatter html file
+
+There is a nice way to save your passwords: Create .netrc under you home directory and put lines in, one per ftp machine, like this one:
+machine yourftp.somewhere.org login yourlogin password "yoursecret"
