@@ -1,5 +1,8 @@
 #include <stdio.h>
 /*http://www.cnblogs.com/william-cheung/p/5371110.html*/
+#ifdef __APPLE__
+    #define unix 1
+#endif
 
 int main()
 {
