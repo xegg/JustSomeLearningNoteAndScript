@@ -1,3 +1,4 @@
+import Pictures
 size :: Int
 size = 12 + 13
 
