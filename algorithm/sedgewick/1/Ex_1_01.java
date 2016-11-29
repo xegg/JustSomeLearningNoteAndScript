@@ -21,6 +21,10 @@ public class Ex_1_01 {
             StdOut.println("not equal");
         }
 
+        StdOut.println('b');
+        StdOut.println('b'+'c');
+        StdOut.println((char)('b'+4));
+
 
     }
 
