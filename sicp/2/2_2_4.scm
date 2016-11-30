@@ -31,6 +31,7 @@
         (below painter (beside smaller smaller)))))
 
 
+
 (define (corner-split painter n)
   (if (= n 0)
       painter
@@ -85,7 +86,7 @@
     (car v))
 
 (define (ycor-vect v)
-    (cadr v))
+    ((cadr v)))
 
 
 (define (add-vect vect another-vect)
@@ -141,20 +142,6 @@
 
 ;; 2.49
 
-(define top-left (make-vect 0.0 1.0))
-(define top-right (make-vect 1.0 1.0))
-(define bottom-left (make-vect 0.0 0.0))
-(define bottom-right (make-vect 1.0 0.0))
-
-(define top (make-segment top-left top-right))
-(define left (make-segment top-left bottom-left))
-(define right (make-segment top-right bottom-right))
-(define bottom (make-segment bottom-left bottom-right))
-
-
-
-
-
 (define (segments->painter segment-list)
   (lambda (frame)
     (for-each
@@ -163,9 +150,101 @@
         ((frame-coord-map frame) (start-segment segment))
         ((frame-coord-map frame) (end-segment segment))))
      segment-list)))
-(segments->painter (list top bottom left right))
 
 
+; we define the corners of the frame (used for 1. and 2.)
+(define c1 (make-vect 0 0))
+(define c2 (make-vect 0 1))
+(define c3 (make-vect 1 1))
+(define c4 (make-vect 1 0))
+
+; 1. outline of frame
+(define outline
+  (segments->painter (list (make-segment c1 c2)
+                           (make-segment c2 c3)
+                           (make-segment c3 c4)
+                           (make-segment c4 c1))))
+
+; 2. X in frame
+(define X
+  (segments->painter (list (make-segment c1 c4)
+                           (make-segment c2 c3))))
+
+; 3. diamond in frame
+; we define the corners of the diamond
+(define d1 (make-vect 0.5 0))
+(define d2 (make-vect 0 0.5))
+(define d3 (make-vect 0.5 1))
+(define d4 (make-vect 1 0.5))
+
+(define diamond
+  (segments->painter (list (make-segment d1 d2)
+                           (make-segment d2 d3)
+                           (make-segment d3 d4)
+                           (make-segment d4 d1))))
+
+
+(define (transform-painter painter origin corner1 corner2)
+  (lambda (frame)
+          (let ((m (frame-coord-map frame)))
+            (let ((new-origin (m origin)))
+              (painter
+               (make-frame new-origin
+                           (sub-vect (m corner1) new-origin)
+                           (sub-vect (m corner2) new-origin)))))))
+
+(define (beside2 painter1 painter2)
+  (let ((split-point (make-vect 0.5 0.0)))
+    (let ((paint-left
+           (transform-painter painter1
+                              (make-vect 0.0 0.0)
+                              split-point
+                              (make-vect 0.0 1.0)))
+          (paint-right
+           (transform-painter painter2
+                              split-point
+                              (make-vect 1.0 0.0)
+                              (make-vect 0.5 1.0))))
+           (lambda (frame)
+             (paint-left frame)
+             (paint-right frame)))))
+
+
+;; 2.50
+(define (flip-horiz painter)
+  (transform-painter painter
+                     (make-vect 1.0 0.0)
+                     (make-vect 0.0 0.0)
+                     (make-vect 1.0 1.0)))
+
+(define (rotate90 painter)
+  (transform-painter painter
+                     (make-vect 1.0 0.0)
+                     (make-vect 1.0 1.0)
+                     (make-vect 0.0 0.0)))
+
+(define (rotate180 painter)
+  (rotate90 (rotate90 painter)))
+
+(define (rotate270 painter)
+  (rotate90 (rotate180 painter)))
+
+;; 2.51
+(define (below painter1 painter2)
+  (let ((split-point (make-vect 0.0 0.5)))
+    (let ((paint-below
+           (transform-painter painter1
+                              (make-vect 0.0 0.0)
+                              (make-vect 1.0 0.0)
+                              split-point))
+          (paint-above
+           (transform-painter painter2
+                              split-point
+                              (make-vect 0.5 1.0)
+                              (make-vect 0.0 1.0))))
+         (lambda (frame)
+           (paint-above frame)
+           (paint-below frame)))))
 
 
 
