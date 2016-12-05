@@ -147,7 +147,7 @@
 
 
 ;; 2.57
-(define (make-sum a1 . a2)
+(define (make-sum2 a1 . a2)
     (if (single-operand? a2)
         (let ((a2 (car a2)))
             (cond ((=number? a1 0)
@@ -160,21 +160,21 @@
                     (list '+ a1 a2))))
         (cons '+ (cons a1 a2))))
 
-(define (sum? x)
+(define (sum?2 x)
     (and (pair? x)
          (eq? (car x) '+)))
 
-(define (addend s)
+(define (addend2 s)
     (cadr s))
 
-(define (augend s)
+(define (augend2 s)
     (let ((tail-operand (cddr s)))
         (if (single-operand? tail-operand)
             (car tail-operand)
             (apply make-sum tail-operand))))
 
 
-(define (make-product m1 . m2)
+(define (make-product2 m1 . m2)
     (if (single-operand? m2)
         (let ((m2 (car m2)))
             (cond ((or (=number? m1 0) (=number? m2 0))
@@ -189,14 +189,14 @@
                     (list '* m1 m2))))
         (cons '* (cons m1 m2))))
 
-(define (product? x)
+(define (product?2 x)
     (and (pair? x)
          (eq? (car x) '*)))
 
-(define (multiplier p)
+(define (multiplier2 p)
     (cadr p))
 
-(define (multiplicand p)
+(define (multiplicand2 p)
     (let ((tail-operand (cddr p)))
         (if (single-operand? tail-operand)
             (car tail-operand)
@@ -205,7 +205,7 @@
 ;; 2.58
 ;;; 58-sum.scm
 
-(define (make-sum a1 a2)
+(define (make-sum3 a1 a2)
     (cond ((=number? a1 0)
             a2)
           ((=number? a2 0)
