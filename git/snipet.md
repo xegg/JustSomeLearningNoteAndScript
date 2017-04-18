@@ -77,7 +77,7 @@ git filter-branch --env-filter \
      fi'
 
 
-GIT_COMMITTER_DATE="Thur Mar 8 20:38:53 2017 +0800" git commit --amend --date "Thur Mar 8 20:38:53 2017 +0800"
+GIT_COMMITTER_DATE="Thur Mar 15 20:38:53 2017 +0800" git commit --amend --date "Thur Mar 15 20:38:53 2017 +0800"
 
 如何删除撤销暂存区域的文件:
 git reset filename.txt
